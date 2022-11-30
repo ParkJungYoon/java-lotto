@@ -24,7 +24,7 @@ public class LottoController {
     private void result(WinningLotto winningLotto, Lottos purchaseLotto) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.getResult(winningLotto, purchaseLotto);
-        
+
         lottoResult.printResult();
         getProfit(lottoResult);
     }
