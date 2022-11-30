@@ -15,4 +15,8 @@ public class OutputView {
     public static void printPurchaseLotto(String lottos) {
         System.out.println(lottos);
     }
+
+    public static void printErrorMessage(String e) {
+        System.out.println(e);
+    }
 }
