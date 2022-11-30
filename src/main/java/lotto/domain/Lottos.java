@@ -3,9 +3,6 @@ package lotto.domain;
 import java.util.List;
 import java.util.StringJoiner;
 
-import static lotto.validator.LottoValidator.validateDuplicate;
-import static lotto.validator.LottoValidator.validateRange;
-
 public class Lottos {
     private final List<Lotto> purchaseNumbers;
 
