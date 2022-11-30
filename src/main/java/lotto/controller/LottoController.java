@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.GenerateRandomNumbersImpl;
-import lotto.domain.Lotto;
-import lotto.domain.Lottos;
-import lotto.domain.WinningLottoNumbers;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -16,21 +13,36 @@ import static lotto.validator.LottoValidator.validateNonNumericNumbers;
 import static lotto.validator.NumberValidator.*;
 
 public class LottoController {
+    private int amount;
+
     public void lottoStart() {
-        initPurchaseLotto();
-        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(initWinningLotto(), initBonus());
-        System.out.println(winningLottoNumbers.toString());
+        Lottos purchaseLotto = initPurchaseLotto();
+        WinningLotto winningLotto = new WinningLotto(initWinningLotto(), initBonus());
+        System.out.println(winningLotto.toString());
+        result(winningLotto, purchaseLotto);
+    }
+
+    private void result(WinningLotto winningLotto, Lottos purchaseLotto) {
+        LottoResult lottoResult = new LottoResult();
+        lottoResult.getResult(winningLotto, purchaseLotto);
+        System.out.println(lottoResult.toString());
+        getProfit(lottoResult);
+    }
+
+    private void getProfit(LottoResult lottoResult) {
+        double profit = lottoResult.calculateProfitRate(amount);
+        OutputView.printProfit(profit);
     }
 
     private int initLottoQuantity() {
-        int amount = Integer.parseInt(InputView.readPurchaseAmount());
+        amount = Integer.parseInt(InputView.readPurchaseAmount());
 
         validateAmountRange(amount);
         validateUnit(amount);
         return amount / 1000;
     }
 
-    private void initPurchaseLotto() {
+    private Lottos initPurchaseLotto() {
         GenerateRandomNumbersImpl generateRandomNumbers = new GenerateRandomNumbersImpl();
         List<Lotto> lottos = new ArrayList<>();
 
@@ -42,6 +54,7 @@ public class LottoController {
 
         OutputView.printPurchaseQuantityMessage(quantity);
         OutputView.printPurchaseLotto(purchaseLottos.toString());
+        return purchaseLottos;
     }
 
     private Lotto initWinningLotto() {

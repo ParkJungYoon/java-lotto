@@ -26,8 +26,16 @@ public class Lotto {
 
     // TODO: 추가 기능 구현
 
-    public boolean isContain(int bonus) {
-        return numbers.contains(bonus);
+    public boolean isContain(int number) {
+        return numbers.contains(number);
+    }
+
+    public int matchCount(Lotto other) {
+        int count = 0;
+        for (int number : numbers) {
+            if (other.isContain(number)) count++;
+        }
+        return count;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -17,5 +18,10 @@ public class Lottos {
             sj.add(lotto.toString());
         }
         return sj.toString();
+    }
+
+
+    public Iterator<Lotto> iterator() {
+        return purchaseNumbers.iterator();
     }
 }

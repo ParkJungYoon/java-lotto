@@ -1,12 +1,14 @@
 package lotto.domain;
 
-public class WinningLottoNumbers {
+import java.util.Iterator;
+
+public class WinningLotto {
     private final static String DUPLICATE_ERROR_MESSAGE = "[ERROR] 중복된 숫자는 입력할 수 없습니다.";
 
     private final Lotto winningLotto;
     private final int bonus;
 
-    public WinningLottoNumbers(Lotto winningLotto, int bonus) {
+    public WinningLotto(Lotto winningLotto, int bonus) {
         validateDuplicateBonus(winningLotto, bonus);
         this.winningLotto = winningLotto;
         this.bonus = bonus;
@@ -16,6 +18,10 @@ public class WinningLottoNumbers {
         if (numbers.isContain(bonus)) {
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
         }
+    }
+
+    public Rank oneCompare(Lotto lotto) {
+        return Rank.getRankByMatchCount(lotto.matchCount(winningLotto), lotto.isContain(bonus));
     }
 
     @Override
