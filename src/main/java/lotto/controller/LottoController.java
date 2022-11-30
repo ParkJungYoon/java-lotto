@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.GenerateRandomNumbersImpl;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
+import lotto.domain.WinningLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,19 +13,19 @@ import java.util.List;
 import static lotto.util.Transform.convertType;
 import static lotto.util.Transform.splitedNumbers;
 import static lotto.validator.LottoValidator.validateNonNumericNumbers;
-import static lotto.validator.NumberValidator.validateRange;
-import static lotto.validator.NumberValidator.validateUnit;
+import static lotto.validator.NumberValidator.*;
 
 public class LottoController {
     public void lottoStart() {
         initPurchaseLotto();
-        Lotto winningLotto = initWinningLotto();
+        WinningLottoNumbers winningLottoNumbers = new WinningLottoNumbers(initWinningLotto(), initBonus());
+        System.out.println(winningLottoNumbers.toString());
     }
 
     private int initLottoQuantity() {
         int amount = Integer.parseInt(InputView.readPurchaseAmount());
 
-        validateRange(amount);
+        validateAmountRange(amount);
         validateUnit(amount);
         return amount / 1000;
     }
@@ -50,8 +51,15 @@ public class LottoController {
 
     private List<Integer> transformInputNumbers(String winningLotto) {
         List<String> numbers = splitedNumbers(winningLotto);
-        validateNonNumericNumbers(numbers);
 
+        validateNonNumericNumbers(numbers);
         return convertType(numbers);
+    }
+
+    private int initBonus() {
+        int bonus = Integer.parseInt(InputView.readBonusNumber());
+
+        validateLottoNumberRange(bonus);
+        return bonus;
     }
 }

@@ -26,6 +26,9 @@ public class Lotto {
 
     // TODO: 추가 기능 구현
 
+    public boolean isContain(int bonus) {
+        return numbers.contains(bonus);
+    }
 
     @Override
     public String toString() {
