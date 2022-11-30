@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.view.OutputView;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,6 +20,10 @@ public class LottoResult {
             }
             result.put(rank, 1);
         }
+    }
+
+    public void printResult() {
+        OutputView.printLottoResult(result);
     }
 
     public int calculateTotalPrize() {

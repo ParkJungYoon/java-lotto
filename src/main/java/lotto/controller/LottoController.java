@@ -18,14 +18,14 @@ public class LottoController {
     public void lottoStart() {
         Lottos purchaseLotto = initPurchaseLotto();
         WinningLotto winningLotto = new WinningLotto(initWinningLotto(), initBonus());
-        System.out.println(winningLotto.toString());
         result(winningLotto, purchaseLotto);
     }
 
     private void result(WinningLotto winningLotto, Lottos purchaseLotto) {
         LottoResult lottoResult = new LottoResult();
         lottoResult.getResult(winningLotto, purchaseLotto);
-        System.out.println(lottoResult.toString());
+        
+        lottoResult.printResult();
         getProfit(lottoResult);
     }
 
