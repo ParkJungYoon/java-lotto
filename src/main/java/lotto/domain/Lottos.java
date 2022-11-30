@@ -10,9 +10,6 @@ public class Lottos {
     private final List<Lotto> purchaseNumbers;
 
     public Lottos(List<Lotto> purchaseNumbers) {
-//        validate(numbers);
-//        validateDuplicate(numbers);
-//        validateRange(numbers);
         this.purchaseNumbers = purchaseNumbers;
     }
 
