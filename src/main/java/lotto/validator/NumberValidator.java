@@ -3,9 +3,9 @@ package lotto.validator;
 public class NumberValidator {
     private final static int MIN_RANGE_NUM = 1000;
     private final static int UNIT = 1000;
-    private static final String NON_NUMERIC_ERROR_MESSAGE = "숫자로만 이루어진 값을 입력해주세요.";
-    private static final String OUT_RANGE_ERROR_MESSAGE = "1000이상 숫자를 입력해주세요.";
-    private static final String INVALID_UNIT_ERROR_MESSAGE = "1000으로 나누어 떨어지는 수를 입력해주세요.";
+    private static final String NON_NUMERIC_ERROR_MESSAGE = "[ERROR] 숫자로만 이루어진 값을 입력해주세요.";
+    private static final String OUT_RANGE_ERROR_MESSAGE = "[ERROR] 1000이상 숫자를 입력해주세요.";
+    private static final String INVALID_UNIT_ERROR_MESSAGE = "[ERROR] 1000으로 나누어 떨어지는 수를 입력해주세요.";
 
     public static void validateNonNumeric(String input) {
         try {
