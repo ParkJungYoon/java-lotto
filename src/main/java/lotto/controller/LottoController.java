@@ -9,12 +9,16 @@ import lotto.view.OutputView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.util.Transform.convertType;
+import static lotto.util.Transform.splitedNumbers;
+import static lotto.validator.LottoValidator.validateNonNumericNumbers;
 import static lotto.validator.NumberValidator.validateRange;
 import static lotto.validator.NumberValidator.validateUnit;
 
 public class LottoController {
     public void lottoStart() {
-        purchaseLotto();
+        initPurchaseLotto();
+        Lotto winningLotto = initWinningLotto();
     }
 
     private int initLottoQuantity() {
@@ -25,7 +29,7 @@ public class LottoController {
         return amount / 1000;
     }
 
-    private void purchaseLotto() {
+    private void initPurchaseLotto() {
         GenerateRandomNumbersImpl generateRandomNumbers = new GenerateRandomNumbersImpl();
         List<Lotto> lottos = new ArrayList<>();
 
@@ -37,5 +41,17 @@ public class LottoController {
 
         OutputView.printPurchaseQuantityMessage(quantity);
         OutputView.printPurchaseLotto(purchaseLottos.toString());
+    }
+
+    private Lotto initWinningLotto() {
+        String winning = InputView.readWinningNumbers();
+        return new Lotto(transformInputNumbers(winning));
+    }
+
+    private List<Integer> transformInputNumbers(String winningLotto) {
+        List<String> numbers = splitedNumbers(winningLotto);
+        validateNonNumericNumbers(numbers);
+
+        return convertType(numbers);
     }
 }
